@@ -45,8 +45,7 @@ in your [bitrise.io](https://www.bitrise.io/) build you only have to do three th
 
 ## What's next?
 
-_fastlane_'s greatness comes from its ability to define different lanes for your different deployment needs - hence the name.
-You can combine this with Bitrise and run separate lanes for separate branches, automatically.
+You can combine _Fastlane_'s abilitity to define different lanes for your different deployment needs with Bitrise and run separate lanes for separate branches, automatically.
 For example you can run a lane for every code push onto the `master` branch to update your
 screenshots and metadata on the App Store and to release the distribution version,
 and a separate lane for the `develop` branch to deploy your test releases
