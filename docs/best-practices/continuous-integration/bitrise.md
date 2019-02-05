@@ -8,14 +8,15 @@ Using _fastlane_ for your Bitrise workflow is easy as pie. Just [add the ](https
 workflow](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow),
 after the `Git Clone` step (and any other dependency step).
 
-{% include message_box.html type="warning" title="Have our Certificate and profile installer step in your workflow!" content=" You should also add/keep the `Certificate and profile installer` step in the workflow, to download your _.p12 Certificates_ and _Provisioning Profiles_ uploaded to [bitrise.io](https://www.bitrise.io) and to install them. **Even if you don't upload your files to** [**bitrise.io**](https://www.bitrise.io) **and instead you use a fastlane tool to manage your code signing files you should still keep this step in the workflow**. Read more about [iOS Code Signing using third party tools](https://devcenter.bitrise.io/ios/code-signing/#use-a-third-party-tool-to-manage-your-code-signing-files).
-"%}
+### _Have our Certificate and profile installer step in your workflow!_
+_You should also add/keep the `Certificate and profile installer` step in the workflow, to download your .p12 Certificates and Provisioning Profiles uploaded to [bitrise.io](https://www.bitrise.io) and to install them. **Even if you don't upload your files to** [**bitrise.io**](https://www.bitrise.io) **and instead you use a fastlane tool to manage your code signing files you should still keep this step in the workflow**. Read more about [iOS Code Signing using third party tools](https://devcenter.bitrise.io/ios/code-signing/#use-a-third-party-tool-to-manage-your-code-signing-files)._
 
 With adding the _fastlane_ step we ensure that you are running on the latest _fastlane_ version, as it is pre-installed on all our VMs. Inside the step you can set the _fastlane_ action and we will run it automatically every time you push a new code change.
 
 For more configuration options see the `Fastlane` step's description in the Workflow Editor!
 
-{% include message_box.html type="info" title="iOS code signing guide" content=" If you want to use [bitrise.io](https://www.bitrise.io) to store your code signing files, you should just follow the [https://devcenter.bitrise.io/ios/code-signing/). "%}
+### _iOS code signing guide_
+_If you want to use [bitrise.io](https://www.bitrise.io) to store your code signing files, you should just follow the [https://devcenter.bitrise.io/ios/code-signing/)._
 
 ## What's next?
 
