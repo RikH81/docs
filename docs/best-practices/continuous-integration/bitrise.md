@@ -1,69 +1,36 @@
-# Nevercode Integration
+# Bitrise Integration
 
-With [Nevercode](https://nevercode.io) you can set up automated builds for your Android and iOS application using _fastlane_. You only need a [`Fastfile`](https://docs.fastlane.tools/#fastlane) in your repository to get started.
+With [Bitrise](https://www.bitrise.io) you can automate building, testing and deploying your iOS and Android builds.
 
-## Specify app repository
+## How to get started?
 
-1. Click **Add a new app** on Nevercode dashboard.
-1. Choose whether to add your application via supported providers using OAuth or add it manually using the other available [authentication methods](https://developer.nevercode.io/docs/authenticating-repository-access).
+Using _fastlane_ for your workflow is easy as pie. Just [add the ](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow)`[Fastlane](/getting-started/manage-your-bitrise-workflow)`[ step to your
+workflow](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow),
+after the `Git Clone` step (and any other dependency step).
 
-## Define the lane to be built
+{% include message_box.html type="warning" title="Have our Certificate and profile installer step in your workflow!" content=" You should also add/keep the `Certificate and profile installer` step in the workflow, to download your _.p12 Certificates_ and _Provisioning Profiles_ uploaded to [bitrise.io](https://www.bitrise.io) and to install them. **Even if you don't upload your files to** [**bitrise.io**](https://www.bitrise.io) **and instead you use a fastlane tool to manage your code signing files you should still keep this step in the workflow**. Read more about [iOS Code Signing using third party tools](https://devcenter.bitrise.io/ios/code-signing/#use-a-third-party-tool-to-manage-your-code-signing-files).
+"%}
 
-After specifying app repository, Nevercode takes a first look at it by listing the `branches` in this repository. The next step for you is to select the branch you want Nevercode to scan for projects.
+With adding the _fastlane_ step we ensure that you are running on the latest _fastlane_ version, as it is pre-installed on all our VMs. Inside the step you can set the _fastlane_ action and we will run it automatically every time you push a new code change.
 
-1. Select a `branch` from the dropdown that Nevercode should scan. **Note** that you can change the branch later if needed.
-1. Click **Scan branch**.
-Nevercode scans the repository from the specified branch. This includes cloning the repository, looking up the available `Fastfiles` and listing the pre-configured `lanes`. All this can be monitored real-time from your browser via the live log window.
-1. Once scanning the branch has finished, choose the `lane` which will be executed as the main build step by Nevercode.
-1. Finalize the setup by checking the appropriate [build options](https://developer.nevercode.io/docs/build-configuration#section-general-build-settings) and click **Save and start build**.
+For more configuration options see the `Fastlane` step's description in the Workflow Editor!
 
-## External dependencies
+{% include message_box.html type="info" title="iOS code signing guide" content=" If you want to use [bitrise.io](https://www.bitrise.io) to store your code signing files, you should just follow the [https://devcenter.bitrise.io/ios/code-signing/). "%}
 
-Nevercode does not automatically install CocoaPods, Carthage or any other external dependencies for _fastlane_ projects. Please use the _fastlane_'s built-in [actions](https://docs.fastlane.tools/actions/), such as [`cocoapods`](https://docs.fastlane.tools/actions/cocoapods/) and [`carthage`](https://docs.fastlane.tools/actions/carthage/), to gain control of that.
+## What's next?
 
-## Code signing
-
-To perform code signing on your iOS app, you can either follow the best practices laid out in [`fastlane` docs](https://docs.fastlane.tools/codesigning/getting-started/#using-match), or you could also make use of [Nevercode's standard code signing methods](https://developer.nevercode.io/docs/code-signing).
-
-When invoking [`match`](https://docs.fastlane.tools/actions/match/) from the `Fastfile`, keep in mind that you need to **grant access to the credentials repository** and expose the **_match_ passphrase** during the build. Both can be securely achieved thanks to the well designed environment variable support of _fastlane_ and Nevercode's support for several SSH keys for authentication.
-
-In your app settings on Nevercode, navigate to the **Environment** tab to manage environment variables and files:
-
-* _match_ passphrase can be defined as a `MATCH_PASSWORD` environment file — this will be automatically detected by _fastlane_ and used to decrypt the credentials repository.
-* You can upload the SSH key for cloning the credentials repository as an environment file, i.e. `MATCH_SSH_KEY`. All environment files whose variable name has the suffix `_SSH_KEY` will be automatically added to the SSH agent and will be ready for use during the whole build process.
-
-## Run tests
-
-### iOS
-
-Testing in Nevercode with _fastlane_ for iOS is 100% automatic. By default, [`scan`](https://docs.fastlane.tools/actions/scan/) is used to invoke the test run, but you can easily swap it out for any other `lane` that you have configured for your test runs. Test results are automatically collected and you don't need to do anything to convert the results from one format to another or place them in a special location on the build machine.
-
-#### Warning
-
-In case you wish to run tests as part of the main build step, we suggest that you use [Trainer](https://github.com/KrauseFx/trainer#use-with-fastlane) to generate reliable JUnit results from the test run and put the results in a directory where we can discover them:
-
-```no-highlight
-trainer(output_directory: ENV["NEVERCODE_XUNIT_RESULTS_DIR"])
-```
-
-### Android
-
-Nevercode detects your **_fastlane_ tests for Android** automatically. However, tests are disabled by default and have to be enabled manually.
-
-1. In your app settings on Nevercode, navigate to the **Test** tab.
-1. Click on **_fastlane_ Gradle** to expand it.
-1. Select **Enabled** and type the **lane name** for tests as specified in your `Fastfile`.
-1. If you would like to run the tests on Android emulator, make sure to select **Require Android emulator**.
-1. Click **Save** to finish the setup. Your _fastlane_ tests will be enabled and run each time you build your app.
-
-## Publish your build artifacts
-
-You can use either `fastlane` to take care of artifact distribution or choose from a number of [Nevercode's own integrations](https://developer.nevercode.io/docs/what-kind-of-build-distribution-services-does-nevercode-support).
-
-## Manage build versions
-
-To make your build version management easy, Nevercode exports the `NEVERCODE_BUILD_NUMBER` environment variable that you can use in your build script. For instance, you could make use of it within [`increment_version_number`](https://docs.fastlane.tools/actions/increment_version_number/) action to define a new version for each build.
+_fastlane_'s greatness comes from its ability to define different lanes for your different deployment needs - hence the name.
+You can combine this with Bitrise and run separate lanes for separate branches, automatically.
+For example you can run a lane for every code push onto the `master` branch to update your
+screenshots and metadata on the App Store and to release the distribution version,
+and a separate lane for the `develop` branch to deploy your test releases
+and all the others to ensure that nobody has broken anything.
+You can simply clone the workflow as many times as you want to,
+and use the `Trigger` feature of [bitrise.io](https://www.bitrise.io) to define
+which Workflow to be selected for this branch / tag / pull request.
+You can find more information about the Triggers feature in the
+[Control what to build when, with the Trigger Map](https://devcenter.bitrise.io/builds/triggering-builds/trigger-map/) guide.
 
 ## More Information
 
-Check out [Nevercode documentation](https://developer.nevercode.io/docs) for more.
+Check out [Bitrise documentation](https://devcenter.bitrise.io/) for more.
