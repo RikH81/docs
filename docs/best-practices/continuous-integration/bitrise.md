@@ -4,7 +4,7 @@ With [Bitrise](https://www.bitrise.io) you can automate building, testing and de
 
 ## How to get started?
 
-Using _fastlane_ for your Bitrise workflow is easy as pie. Just [add the ](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow)`[Fastlane](/getting-started/manage-your-bitrise-workflow)`[ step to your
+Using _fastlane_ for your Bitrise workflow is easy as pie. Just [add the ](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow) [Fastlane](https://www.bitrise.io/integrations/steps/fastlane) [ step to your
 workflow](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow),
 after the `Git Clone` step (and any other dependency step).
 
@@ -17,6 +17,31 @@ For more configuration options see the `Fastlane` step's description in the Work
 
 ### _iOS code signing guide_
 _If you want to use [bitrise.io](https://www.bitrise.io) to store your code signing files, you should just follow the [https://devcenter.bitrise.io/ios/code-signing/)._
+
+## How to configure fastlane match for Bitrise
+
+If you want to use [fastlane match](https://github.com/fastlane/fastlane/tree/master/match)
+in your [bitrise.io](https://www.bitrise.io/) build you only have to do three things:
+
+1. Make sure that a single SSH key can be used to `git clone` both your main repository (the one
+   you register on [bitrise.io](https://www.bitrise.io/)) and the `match` repository.
+   You can find more info [in this guide](https://github.com/bitrise-io/devcenter/blob/master/faq/adding-projects-with-submodules).
+2. Add an environment variable `MATCH_PASSWORD`, as
+   [described in ](https://github.com/fastlane/fastlane/tree/master/match#encryption-password)`[match](https://github.com/fastlane/fastlane/tree/master/match#encryption-password)`['s docs](https://github.com/fastlane/fastlane/tree/master/match#encryption-password),
+   to specify the `Encryption password` you used for `match`.
+   On [bitrise.io](https://www.bitrise.io/) you should add this as a `Secret Environment Variable`,
+   in the [Workflow Editor](http://devcenter.bitrise.io/docs/add-your-first-step-to-your-apps-workflow).
+   _Make sure to disable_ the `Replace variables in input?` option of the environment
+   variable, to not to cause issues when the value includes the `$` (dollar) sign, which is used
+   for environment variable expansion.
+
+   ![](/img/matchpassword.png)
+3. Make sure to use `match`'s `readonly` mode, or else `match` will try to connect
+   to the Apple Developer Portal, which requires further authorization (providing additional
+   username and password for Apple Dev Portal login)!
+   * If you use `match` in your `Fastfile` or `fastlane` config: `match(app_identifier: "my.domain", type: "appstore", readonly: true)`
+   * If you use it as a command line tool: `match development --readonly`
+   * More info in `match`'s [official readme / docs](https://docs.fastlane.tools/actions/match/)
 
 ## What's next?
 
