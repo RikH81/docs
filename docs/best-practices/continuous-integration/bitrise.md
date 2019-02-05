@@ -27,7 +27,7 @@ in your [bitrise.io](https://www.bitrise.io/) build you only have to do three th
    you register on [bitrise.io](https://www.bitrise.io/)) and the `match` repository.
    You can find more info [in this guide](https://github.com/bitrise-io/devcenter/blob/master/faq/adding-projects-with-submodules).
 2. Add an environment variable `MATCH_PASSWORD`, as
-   [described in ](https://github.com/fastlane/fastlane/tree/master/match#encryption-password)`[match](https://github.com/fastlane/fastlane/tree/master/match#encryption-password)`['s docs](https://github.com/fastlane/fastlane/tree/master/match#encryption-password),
+   [described in ](https://github.com/fastlane/fastlane/tree/master/match#encryption-password) [match](https://github.com/fastlane/fastlane/tree/master/match#encryption-password) ['s docs](https://github.com/fastlane/fastlane/tree/master/match#encryption-password),
    to specify the `Encryption password` you used for `match`.
    On [bitrise.io](https://www.bitrise.io/) you should add this as a `Secret Environment Variable`,
    in the [Workflow Editor](http://devcenter.bitrise.io/docs/add-your-first-step-to-your-apps-workflow).
@@ -45,7 +45,7 @@ in your [bitrise.io](https://www.bitrise.io/) build you only have to do three th
 
 ## What's next?
 
-You can combine _Fastlane_'s abilitity to define different lanes for your different deployment needs with Bitrise and run separate lanes for separate branches, automatically.
+You can combine _fastlane_'s abilitity to define different lanes for your different deployment needs with Bitrise and run separate lanes for separate branches, automatically.
 For example you can run a lane for every code push onto the `master` branch to update your
 screenshots and metadata on the App Store and to release the distribution version,
 and a separate lane for the `develop` branch to deploy your test releases
