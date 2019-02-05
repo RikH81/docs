@@ -1,10 +1,10 @@
 # Bitrise Integration
 
-With [Bitrise](https://www.bitrise.io) you can automate building, testing and deploying your iOS and Android builds.
+With [Bitrise](https://www.bitrise.io) you can automate building, testing and deploying your iOS and Android apps.
 
 ## How to get started?
 
-Using _fastlane_ for your workflow is easy as pie. Just [add the ](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow)`[Fastlane](/getting-started/manage-your-bitrise-workflow)`[ step to your
+Using _fastlane_ for your Bitrise workflow is easy as pie. Just [add the ](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow)`[Fastlane](/getting-started/manage-your-bitrise-workflow)`[ step to your
 workflow](https://devcenter.bitrise.io/getting-started/manage-your-bitrise-workflow),
 after the `Git Clone` step (and any other dependency step).
 
